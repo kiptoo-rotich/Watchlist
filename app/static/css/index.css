@@ -14,7 +14,6 @@ li{
 h3{
     font-size: 30px;
     color: green;
-    font-family: fantasy;
     font-weight: 600;
     text-align: center;
 }
@@ -22,4 +21,13 @@ h3{
 ul{
     text-align: center;
     margin-top: 4%;
+}
+
+.search{
+    width:50%;
+    float: right;
+}
+
+.submit{
+    font-weight: 600;
 }
