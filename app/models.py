@@ -62,6 +62,7 @@ class Movie:
 class Review(db.Model):
     __tablename__ ='reviews'
         
+    all_reviews = []
     
     def __init__(self, movie_id, title, imageurl, review):
         self.movie_id = movie_id

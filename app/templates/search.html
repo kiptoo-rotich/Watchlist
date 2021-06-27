@@ -6,9 +6,9 @@
 {% endblock %}
 {% block content %}
     <div class="row">
-        <h3>Found {{movies | count}} matches</h3>
+        <h3 class="text-center">Found {{movies | count}} matches</h3>
         <hr>
-        <ul>
+        <ul style="list-style:none; ">
             {{macro.displayMovieList(movies)}}
         </ul>
     </div>

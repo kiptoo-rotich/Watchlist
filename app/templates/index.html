@@ -1,38 +1,48 @@
-
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
 
 <!-- Styles block -->
 {% block styles %}
-    {{super()}}
-    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
 {% endblock %}
 <!-- Content block -->
 {% block content %}
 
 <div class="container">
-    <form>
-        <input type="text" name="movie_query" placeholder="Search for a movie" id="" class="form-control search">
-        <input type="submit" value="Submit" class="btn btn-success submit">
-    </form>
+    <center>
+        <form style="display:flex; width:50%;">
+            <input type="text" name="movie_query" placeholder="Search for a movie" id="" class="form-control search">
+            <input type="submit" value="Submit" class="btn btn-success submit" style="margin-left: 10px;">
+        </form>
+    </center>
 </div>
 
 <!-- Popular movie -->
-<h3> Popular Movies</h3>
-<ul>
-    {{ macro.displayMovieList(popular)}}<hr>
-</ul>
+<h3 class="text-center clear"
+    style="clear:both; margin-top:20x; text-transform:uppercase; font-size:25px; text-decoration:underline;"> Popular
+    Movies</h3>
+<ul style="list-style:none;" class="text-center">
+    {{ macro.displayMovieList(popular)}}
+    <hr>
+</ul><br>
 
 <!-- Upcoming movie  -->
-<h3> Upcoming Movies </h3>
-<ul>
-    {{ macro.displayMovieList(upcoming)}}<hr>
-</ul>
+<h3 class="text-center clear"
+    style="clear:both; margin-top:20x; text-transform:uppercase; font-size:25px; text-decoration:underline;"> Upcoming
+    Movies </h3>
+<ul style="list-style:none; ">
+    {{ macro.displayMovieList(upcoming)}}
+    <hr>
+</ul><br>
 
 <!-- Now showing movie -->
-<h3>Now Showing</h3>
-<ul>
-    {{ macro.displayMovieList(now_showing)}}<hr>
+<h3 class="text-center clear"
+    style="clear:both; margin-top:20x; text-transform:uppercase; font-size:25px; text-decoration:underline;">Now Showing
+</h3>
+<ul style="list-style:none; ">
+    {{ macro.displayMovieList(now_showing)}}
+    <hr>
 </ul>
 
 
