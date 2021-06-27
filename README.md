@@ -3,9 +3,13 @@
 #### Author: [Kiptoo-Rotich](https://github.com/Kiptoo-Rotich)
 
 ## Screenshots
+### Landing page
 ![watchlist1](https://user-images.githubusercontent.com/48821300/123549644-8acf0a00-d772-11eb-8987-940c8e13a0a0.png)
+### Search results
 ![watchlist2](https://user-images.githubusercontent.com/48821300/123549680-a63a1500-d772-11eb-9fb1-44cb1637b4d9.png)
+### Review page
 ![watchlist3](https://user-images.githubusercontent.com/48821300/123549686-afc37d00-d772-11eb-90ab-37ccdf2e1ddc.png)
+### Add review page
 ![watchlist4](https://user-images.githubusercontent.com/48821300/123549701-bb16a880-d772-11eb-82e7-7c9b08e14ef4.png)
 
 
