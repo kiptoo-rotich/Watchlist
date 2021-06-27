@@ -50,7 +50,7 @@ def search(movie_name):
 @main.route('/movie/review/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_review(id):
-    form = ReviewForm()
+    form = ReviewForms()
     movie = get_movie(id)
     if form.validate_on_submit():
         title = form.title.data
