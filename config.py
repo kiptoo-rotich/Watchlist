@@ -7,7 +7,7 @@ class Config:
     MOVIE_API_BASE_URL = 'https://api.themoviedb.org/3/movie/{}?api_key={}'
     MOVIE_API_KEY = os.environ.get('MOVIE_API_KEY')
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:qwerty@localhost/watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:qwerty@localhost/watchlist'
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
@@ -43,12 +43,12 @@ class DevConfig(Config):
         Config: The parent configuration class with General configuration settings
     '''
     
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:qwerty@localhost/watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:qwerty@localhost/watchlist'
     DEBUG = True
     
 
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:qwerty@localhost/watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:qwerty@localhost/watchlist'
 
 
 config_options = {

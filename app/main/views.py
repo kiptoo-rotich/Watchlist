@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import render_template, request, redirect, url_for, abort
 from . import main
 from ..request import get_movies, get_movie, search_movie
@@ -6,6 +7,8 @@ from .forms import ReviewForms, UpdateProfile
 from flask_login import login_required, current_user
 from .. import db,photos
 import markdown2
+from time import time
+
 
 
 #views
@@ -20,11 +23,13 @@ def index():
     now_showing_movie = get_movies('now_playing')
     title = 'Home - Welcome to the best Movie Review Website online'
     search_movie = request.args.get('movie_query')
+    message="Opps! Looks like you are offline. Check your internet connection and try again"
     if search_movie:
         return redirect(url_for('main.search', movie_name=search_movie))
-    else:
+    elif popular_movies or upcoming_movie or now_showing_movie:
         return render_template('index.html', title=title, popular = popular_movies, upcoming = upcoming_movie, now_showing = now_showing_movie)
-
+    else:
+        return render_template('network.html',message=message)
 
 @main.route('/movie/<int:id>')
 def movie(id):
@@ -54,17 +59,19 @@ def new_review(id):
     movie = get_movie(id)
     if form.validate_on_submit():
         title = form.title.data
-        review = form.review.data
+        movie_review = form.movie_review.data
 
         # Updated review instance
-        new_review = Review(movie_id=movie.id,title=title,image_path=movie.poster,movie_review=review,user=current_user)
+        new_review = Review(movie_id=movie.id,movie_title=title,image_path=movie.poster,review=movie_review,user_id=current_user.id)
 
         # save review method
-        new_review.save_review()
+        new_review.save_reviews()
+        
         return redirect(url_for('.movie',id = movie.id ))
 
     title = f'{movie.title} review'
     return render_template('new_review.html',title = title, review_form=form, movie=movie)
+
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -107,7 +114,11 @@ def update_pic(uname):
 @main.route('/review/<int:id>')
 def single_review(id):
     review=Review.query.get(id)
+    now=datetime.now()
+    posted=review.posted
+    elapsed_time=now-posted
+    username=User.query.get(review.user_id).username
     if review is None:
         abort(404)
     format_review = markdown2.markdown(review.movie_review,extras=["code-friendly", "fenced-code-blocks"])
-    return render_template('review.html',review = review,format_review=format_review)
+    return render_template('review.html',review = review,format_review=format_review,elapsed_time=elapsed_time,username=username)

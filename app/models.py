@@ -5,7 +5,7 @@ from . import login_manager
 from datetime import datetime
 
 class User(db.Model,UserMixin):
-    __tablename__ ='users'
+    __tablename__='users'
     
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), index=True)
@@ -15,7 +15,7 @@ class User(db.Model,UserMixin):
     profile_pic_path = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
 
-    reviews = db.relationship('Review',backref = 'user',lazy = "dynamic")
+    reviews = db.relationship('Review',backref = 'users',lazy = "dynamic")
 
     @property
     def password(self):
@@ -40,7 +40,7 @@ class Role(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
-    user = db.relationship('User',backref='role',lazy="dynamic")
+    user = db.relationship('User',backref='roles',lazy="dynamic")
     
     def __repr__(self):
         return f'User {self.name}'
@@ -60,15 +60,16 @@ class Movie:
         self.vote_count = vote_count
         
 class Review(db.Model):
-    __tablename__ ='reviews'
+    __tablename__='reviews'
         
     all_reviews = []
     
-    def __init__(self, movie_id, title, imageurl, review):
+    def __init__(self, movie_id, movie_title, image_path, review, user_id):
         self.movie_id = movie_id
-        self.title = title
-        self.imageurl = imageurl
-        self.review = review
+        self.movie_title = movie_title
+        self.image_path = image_path
+        self.movie_review = review
+        self.user_id=user_id
         
     def save_reviews(self):
         db.session.add(self)
@@ -80,11 +81,8 @@ class Review(db.Model):
         
     @classmethod
     def get_reviews(cls,id):
-        response = []
-        for review in cls.all_reviews:
-            if review.movie_id == id:
-                response.append(review)
-        return response
+        reviews=Review.query.filter_by(movie_id=id).all()
+        return reviews
 
     id = db.Column(db.Integer,primary_key = True)
     movie_id = db.Column(db.Integer)
@@ -93,3 +91,4 @@ class Review(db.Model):
     movie_review = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+

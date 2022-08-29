@@ -17,7 +17,6 @@ def get_movies(category):
     '''
     Function that gets the json response to our url request
     '''
-    
     get_movies_url = base_url.format(category, api_key)
     
     with urllib.request.urlopen(get_movies_url) as url:
@@ -28,7 +27,6 @@ def get_movies(category):
         if get_movies_response['results']:
             movie_results_list = get_movies_response['results']
             movie_results = process_results(movie_results_list)
-            
     return movie_results
 def process_results(movie_list):
     '''
@@ -51,7 +49,7 @@ def process_results(movie_list):
         if poster:
             movie_object = Movie(id, title, overview,poster,vote_average,vote_count)
             movie_results.append(movie_object)
-            
+
     return movie_results
 
 def get_movie(id):

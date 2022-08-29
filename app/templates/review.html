@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 
 {% block content%}
-<div class="container-fluid">
+<div class="container-fluid container">
 
     <div class="row">
         <div class="col-sm-4">
@@ -9,7 +9,9 @@
         </div>
 
         <div class="col-sm-8">
-            {{format_review|safe}}
+            <h3><b>{{review.movie_title}}</b></h3>
+            <p>{{format_review|safe}}</p>
+            <p>Posted: <i>{{review.posted.strftime('%Y-%m-%d')}} at {{review.posted.strftime('%H:%m')}}</i> by <b><i>{{username}}.</i></b></p>
         </div>
     </div>
 </div>
